@@ -34,6 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -45,9 +46,22 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WorkingMode.cs" />
+    <Compile Include="WorkingModesCollection.cs" />
+    <Compile Include="WorkingModes\FifthWorkingMode.cs" />
+    <Compile Include="WorkingModes\FirstWorkingMode.cs" />
+    <Compile Include="WorkingModes\FourthWorkingMode.cs" />
+    <Compile Include="WorkingModes\SecondWorkingMode.cs" />
+    <Compile Include="WorkingModes\ThirdWorkingMode.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DataLayer\DataLayer.csproj">
+      <Project>{974fa23d-b72f-46b7-b438-6e3ad80133b2}</Project>
+      <Name>DataLayer</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

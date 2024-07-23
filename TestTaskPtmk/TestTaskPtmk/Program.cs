@@ -8,6 +8,8 @@ namespace TestTaskPtmk
 {
     class Program
     {
+        private static WorkingModesCollection workingModes = new WorkingModesCollection();
+
         static void Main(string[] args)
         {
         }
