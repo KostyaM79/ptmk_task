@@ -13,5 +13,7 @@ namespace DataLayer
         void CreateOneRecord(IWorker worker);
 
         void GetWorkers(IWorkersCollection workers);
+
+        void CreateRecordsSet(IWorker[] workers);
     }
 }

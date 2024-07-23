@@ -13,6 +13,11 @@ namespace TestTaskPtmk
 
         public IWorker[] Workers => workers.ToArray();
 
+        public void Add(IWorker worker)
+        {
+            workers.Add(worker);
+        }
+
         public void Create(string fullName, DateTime dateOfBirth, string sex)
         {
             workers.Add(new Worker()

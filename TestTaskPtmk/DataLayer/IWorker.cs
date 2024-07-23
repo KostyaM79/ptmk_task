@@ -13,5 +13,7 @@ namespace DataLayer
         DateTime DateOfBirth { get; set; }
 
         string Sex { get; set; }
+
+        int GetAge();
     }
 }

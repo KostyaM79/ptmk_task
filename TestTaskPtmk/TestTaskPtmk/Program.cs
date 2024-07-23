@@ -15,7 +15,7 @@ namespace TestTaskPtmk
         static void Main(string[] args)
         {
             WorkingMode mode = workingModes.GetWorkingMode(args[0]);
-            //WorkingMode mode = workingModes.GetWorkingMode("1");
+            //WorkingMode mode = workingModes.GetWorkingMode("4");
             Console.WriteLine(mode.Run(args, dataBase));
         }
     }

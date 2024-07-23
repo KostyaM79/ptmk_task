@@ -16,7 +16,11 @@ namespace TestTaskPtmk
 
         public override string Run(string[] args, IDataBase db)
         {
-            throw new NotImplementedException();
+            WorkersCollection workers = new WorkersCollection();
+            NameGenerator nameGenerator = new NameGenerator();
+            nameGenerator.Generate(workers, 1000000);
+            db.CreateRecordsSet(workers.Workers);
+            return "OK";
         }
     }
 }
