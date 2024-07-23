@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 
 namespace DataLayer
 {
-    public interface IDataBase
+    public interface IWorker
     {
-        bool CreateWorkersTable();
+        string FullName { get; set; }
 
-        void CreateOneRecord(IWorker worker);
+        DateTime DateOfBirth { get; set; }
+
+        string Sex { get; set; }
     }
 }

@@ -9,6 +9,10 @@ namespace TestTaskPtmk
 {
     public abstract class WorkingMode
     {
+        private readonly IReport report = new Report();
+
+        protected IReport Report => report;
+
         public string ModeId { get; protected set; }
 
         public abstract string Run(string[] args, IDataBase db);

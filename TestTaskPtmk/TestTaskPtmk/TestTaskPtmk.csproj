@@ -72,8 +72,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IReport.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Report.cs" />
+    <Compile Include="Worker.cs" />
     <Compile Include="WorkingMode.cs" />
     <Compile Include="WorkingModesCollection.cs" />
     <Compile Include="WorkingModes\EmptyWorkingMode.cs" />

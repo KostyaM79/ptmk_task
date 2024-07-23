@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DataLayer;
 
-namespace DataLayer
+namespace TestTaskPtmk
 {
-    public interface IDataBase
+    public interface IReport
     {
-        bool CreateWorkersTable();
-
-        void CreateOneRecord(IWorker worker);
+        void CreateReport(IWorker worker);
     }
 }
