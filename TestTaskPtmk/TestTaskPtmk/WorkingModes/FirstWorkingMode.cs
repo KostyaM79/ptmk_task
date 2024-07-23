@@ -16,7 +16,10 @@ namespace TestTaskPtmk
 
         public override string Run(string[] args, IDataBase db)
         {
-            throw new NotImplementedException();
+            if (db.CreateWorkersTable())
+                return "Таблица успешно создана!";
+            else
+                return "Нет необходимости создавать таблицу, так как она уже имеется в БД!";
         }
     }
 }

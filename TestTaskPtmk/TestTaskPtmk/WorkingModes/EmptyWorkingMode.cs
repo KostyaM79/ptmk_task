@@ -5,11 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TestTaskPtmk.WorkingModes
+namespace TestTaskPtmk
 {
     public class EmptyWorkingMode : WorkingMode
     {
-        public EmptyWorkingMode() { }
+        public EmptyWorkingMode()
+        {
+            ModeId = "0";
+        }
 
         public override string Run(string[] args, IDataBase db)
         {

@@ -16,6 +16,11 @@ namespace TestTaskPtmk
             CollectionInitialize();
         }
 
+        public WorkingMode GetWorkingMode(string modeId)
+        {
+            return workingModes.SingleOrDefault(m => m.ModeId == modeId) ?? workingModes.SingleOrDefault(m => m.ModeId == "0");
+        }
+
         private void CollectionInitialize()
         {
             Assembly assembly = Assembly.GetAssembly(typeof(WorkingMode));                              // Получаем сборку, содержащую класс WorkingMode

@@ -8,6 +8,6 @@ namespace DataLayer
 {
     public interface IDataBase
     {
-
+        bool CreateWorkersTable();
     }
 }
