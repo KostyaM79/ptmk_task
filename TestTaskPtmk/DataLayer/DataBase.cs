@@ -34,6 +34,20 @@ namespace DataLayer
             cmd.Connection.Close();
         }
 
+        public void GetWorkers(IWorkersCollection workers)
+        {
+            SqlCommand cmd = Get_SelectWorkersCmd();
+            cmd.Connection.Open();
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            while (reader.Read())
+            {
+                workers.Create($"{reader["FullName"]}", (DateTime)reader["DateOfBirth"], $"{reader["Sex"]}");
+            }
+
+            cmd.Connection.Close();
+        }
+
         private SqlCommand Get_CreateRecordCmd()
         {
             SqlCommand cmd = new SqlCommand("INSERT INTO Workers(FullName, DateOfBirth, Sex) VALUES(@FullName, @DateOfBirth, @Sex)");
@@ -54,5 +68,16 @@ namespace DataLayer
             cmd.Connection = new SqlConnection(ConfigurationManager.ConnectionStrings["ptmkDb"].ConnectionString);
             return cmd;
         }
+
+        private SqlCommand Get_SelectWorkersCmd()
+        {
+            SqlCommand cmd = new SqlCommand("SELECT * FROM Workers WHERE " +
+                "(FullName IN (SELECT FullName FROM Workers GROUP BY FullName, DateOfBirth HAVING COUNT(*)=1) AND " +
+                "DateOfBirth IN (SELECT DateOfBirth FROM Workers GROUP BY FullName, DateOfBirth HAVING COUNT(*)=1))");
+            cmd.CommandType = CommandType.Text;
+            cmd.Connection = new SqlConnection(ConfigurationManager.ConnectionStrings["ptmkDb"].ConnectionString);
+            return cmd;
+        }
+
     }
 }

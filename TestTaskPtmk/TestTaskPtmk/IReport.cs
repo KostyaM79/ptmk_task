@@ -10,5 +10,7 @@ namespace TestTaskPtmk
     public interface IReport
     {
         void CreateReport(IWorker worker);
+
+        void CreateReport(IWorker[] workers);
     }
 }

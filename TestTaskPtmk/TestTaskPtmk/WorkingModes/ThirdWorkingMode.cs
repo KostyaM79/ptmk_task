@@ -16,7 +16,12 @@ namespace TestTaskPtmk
 
         public override string Run(string[] args, IDataBase db)
         {
-            throw new NotImplementedException();
+            WorkersCollection workers = new WorkersCollection();
+            db.GetWorkers(workers);
+            Report.CreateReport(workers.Workers);
+            return "OK";
         }
+
+        
     }
 }

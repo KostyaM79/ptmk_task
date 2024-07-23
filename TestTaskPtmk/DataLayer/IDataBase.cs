@@ -11,5 +11,7 @@ namespace DataLayer
         bool CreateWorkersTable();
 
         void CreateOneRecord(IWorker worker);
+
+        void GetWorkers(IWorkersCollection workers);
     }
 }
