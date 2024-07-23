@@ -16,7 +16,7 @@ namespace TestTaskPtmk
 
         public override string Run(string[] args, IDataBase db)
         {
-            throw new NotImplementedException();
+            return "Данный режим в настоящее время не реализован!";
         }
     }
 }

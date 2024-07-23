@@ -14,6 +14,8 @@ namespace DataLayer
 
         void GetWorkers(IWorkersCollection workers);
 
+        void GetWorkers(IWorkersCollection workers, string nameExpression, string sex);
+
         void CreateRecordsSet(IWorker[] workers);
     }
 }

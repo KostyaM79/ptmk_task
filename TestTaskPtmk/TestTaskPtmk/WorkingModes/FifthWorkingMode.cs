@@ -16,7 +16,19 @@ namespace TestTaskPtmk
 
         public override string Run(string[] args, IDataBase db)
         {
-            throw new NotImplementedException();
+            WorkersCollection workers = new WorkersCollection();
+
+            DateTime startTime = DateTime.Now;
+
+            db.GetWorkers(workers, "F%", "Male");
+
+            DateTime endTime = DateTime.Now;
+
+            Report.CreateReport(workers.Workers);
+
+            Console.WriteLine($"Время выполнения запроса: {(endTime-startTime).TotalSeconds}");
+
+            return "OK";
         }
     }
 }

@@ -11,7 +11,7 @@ namespace TestTaskPtmk
     {
         public void CreateReport(IWorker worker)
         {
-            Console.WriteLine($" Name: {worker.FullName, -20}\t|Date of birth: {worker.DateOfBirth,-10:d}\t|Sex: {worker.Sex, -6}\t|Age: {worker.GetAge()}");
+            Console.WriteLine($" Name: {worker.FullName, -34}\t|Date of birth: {worker.DateOfBirth,-10:d}\t|Sex: {worker.Sex, -6}\t|Age: {worker.GetAge()}");
         }
 
         public void CreateReport(IWorker[] workers)

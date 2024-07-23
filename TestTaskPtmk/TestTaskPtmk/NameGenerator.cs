@@ -87,7 +87,8 @@ namespace TestTaskPtmk
         private DateTime GetDate()
         {
             DateTime startDate = DateTime.Today.AddYears(-80);
-            int days = (DateTime.Today - startDate).Days;
+            DateTime endDate = DateTime.Today.AddYears(-20);
+            int days = (endDate - startDate).Days;
             return startDate.AddDays(rnd.Next(0, days));
         }
     }

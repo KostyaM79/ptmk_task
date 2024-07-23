@@ -36,7 +36,7 @@ namespace DataLayer
 
         public void GetWorkers(IWorkersCollection workers)
         {
-            SqlCommand cmd = Get_SelectWorkersCmd();
+            SqlCommand cmd = Get_SelectUniqueWorkersCmd();
             cmd.Connection.Open();
             SqlDataReader reader = cmd.ExecuteReader();
 
@@ -46,6 +46,21 @@ namespace DataLayer
             }
 
             cmd.Connection.Close();
+        }
+
+        public void GetWorkers(IWorkersCollection workers, string nameExpression, string sex)
+        {
+            SqlCommand cmd = Get_SelectWorkersCmd();
+            cmd.Parameters["@expr"].Value = nameExpression;
+            cmd.Parameters["@sex"].Value = sex;
+
+            cmd.Connection.Open();
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            while(reader.Read())
+            {
+                workers.Create($"{reader["FullName"]}", (DateTime)reader["DateOfBirth"], $"{reader["Sex"]}");
+            }
         }
 
         public void CreateRecordsSet(IWorker[] workers)
@@ -103,11 +118,22 @@ namespace DataLayer
             return cmd;
         }
 
-        private SqlCommand Get_SelectWorkersCmd()
+        private SqlCommand Get_SelectUniqueWorkersCmd()
         {
             SqlCommand cmd = new SqlCommand("SELECT * FROM Workers WHERE " +
                 "(FullName IN (SELECT FullName FROM Workers GROUP BY FullName, DateOfBirth HAVING COUNT(*)=1) AND " +
                 "DateOfBirth IN (SELECT DateOfBirth FROM Workers GROUP BY FullName, DateOfBirth HAVING COUNT(*)=1))");
+            cmd.CommandType = CommandType.Text;
+            cmd.Connection = new SqlConnection(ConfigurationManager.ConnectionStrings["ptmkDb"].ConnectionString);
+            return cmd;
+        }
+
+        private SqlCommand Get_SelectWorkersCmd()
+        {
+            SqlCommand cmd = new SqlCommand("SELECT * FROM Workers WHERE(FullName LIKE(@expr) AND Sex=@sex)");
+            cmd.Parameters.Add(new SqlParameter("@expr", SqlDbType.NVarChar, 100, ParameterDirection.Input, false, 0, 0, null, DataRowVersion.Current, null));
+            cmd.Parameters.Add(new SqlParameter("@sex", SqlDbType.NVarChar, 6, ParameterDirection.Input, false, 0, 0, null, DataRowVersion.Current, null));
+            
             cmd.CommandType = CommandType.Text;
             cmd.Connection = new SqlConnection(ConfigurationManager.ConnectionStrings["ptmkDb"].ConnectionString);
             return cmd;
@@ -143,5 +169,6 @@ namespace DataLayer
             cmd.CommandTimeout = 90;
             return cmd;
         }
+
     }
 }
