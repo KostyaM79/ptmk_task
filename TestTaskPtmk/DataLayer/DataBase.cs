@@ -165,7 +165,7 @@ namespace DataLayer
         {
             SqlCommand cmd = new SqlCommand("SELECT * FROM Workers WHERE " +
                 "(FullName IN (SELECT FullName FROM Workers GROUP BY FullName, DateOfBirth HAVING COUNT(*)=1) AND " +
-                "DateOfBirth IN (SELECT DateOfBirth FROM Workers GROUP BY FullName, DateOfBirth HAVING COUNT(*)=1))");
+                "DateOfBirth IN (SELECT DateOfBirth FROM Workers GROUP BY FullName, DateOfBirth HAVING COUNT(*)=1)) ORDER BY FullName");
             cmd.CommandType = CommandType.Text;
             cmd.Connection = new SqlConnection(ConfigurationManager.ConnectionStrings["ptmkDb"].ConnectionString);
             return cmd;
