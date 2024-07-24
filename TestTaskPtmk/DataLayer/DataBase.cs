@@ -22,12 +22,24 @@ namespace DataLayer
             return (int)cmd.Parameters["@res"].Value == 1;
         }
 
-        public void CreateOneRecord(IWorker worker)
+        //public void CreateOneRecord(IWorker worker)
+        //{
+        //    SqlCommand cmd = Get_CreateRecordCmd();
+        //    cmd.Parameters["@FullName"].Value = worker.FullName;
+        //    cmd.Parameters["@DateOfBirth"].Value = worker.DateOfBirth;
+        //    cmd.Parameters["@Sex"].Value = worker.Sex;
+
+        //    cmd.Connection.Open();
+        //    cmd.ExecuteNonQuery();
+        //    cmd.Connection.Close();
+        //}
+
+        public void CreateOneRecord(string fullName, DateTime dateOfBirth, string sex)
         {
             SqlCommand cmd = Get_CreateRecordCmd();
-            cmd.Parameters["@FullName"].Value = worker.FullName;
-            cmd.Parameters["@DateOfBirth"].Value = worker.DateOfBirth;
-            cmd.Parameters["@Sex"].Value = worker.Sex;
+            cmd.Parameters["@FullName"].Value = fullName;
+            cmd.Parameters["@DateOfBirth"].Value = dateOfBirth;
+            cmd.Parameters["@Sex"].Value = sex;
 
             cmd.Connection.Open();
             cmd.ExecuteNonQuery();

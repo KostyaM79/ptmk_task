@@ -15,5 +15,7 @@ namespace DataLayer
         string Sex { get; set; }
 
         int GetAge();
+
+        void SendToDataBase(IDataBase db);
     }
 }

@@ -21,5 +21,10 @@ namespace TestTaskPtmk
             DateTime newDate = DateOfBirth.AddYears(years);
             return newDate > DateTime.Today ? years - 1 : years;
         }
+
+        public void SendToDataBase(IDataBase db)
+        {
+            db.CreateOneRecord(FullName, DateOfBirth, Sex);
+        }
     }
 }

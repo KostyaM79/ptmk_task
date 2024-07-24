@@ -10,7 +10,9 @@ namespace DataLayer
     {
         bool CreateWorkersTable();
 
-        void CreateOneRecord(IWorker worker);
+        //void CreateOneRecord(IWorker worker);
+
+        void CreateOneRecord(string fullName, DateTime dateOfBirth, string sex);
 
         void GetWorkers(IWorkersCollection workers);
 

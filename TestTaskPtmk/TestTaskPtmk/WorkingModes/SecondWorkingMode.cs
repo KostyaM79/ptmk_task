@@ -28,7 +28,7 @@ namespace TestTaskPtmk
                     Sex = args[3]
                 };
 
-                db.CreateOneRecord(worker);
+                worker.SendToDataBase(db);
 
                 Report.CreateReport(worker);
 
