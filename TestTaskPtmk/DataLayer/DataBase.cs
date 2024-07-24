@@ -9,8 +9,15 @@ using System.Configuration;
 
 namespace DataLayer
 {
+    /// <summary>
+    /// Выполняет запросы к базе данных
+    /// </summary>
     public class DataBase : IDataBase
     {
+        /// <summary>
+        /// Создаёт таблицу Workers
+        /// </summary>
+        /// <returns></returns>
         public bool CreateWorkersTable()
         {
             SqlCommand cmd = Get_CreateTableCmd();
@@ -22,18 +29,12 @@ namespace DataLayer
             return (int)cmd.Parameters["@res"].Value == 1;
         }
 
-        //public void CreateOneRecord(IWorker worker)
-        //{
-        //    SqlCommand cmd = Get_CreateRecordCmd();
-        //    cmd.Parameters["@FullName"].Value = worker.FullName;
-        //    cmd.Parameters["@DateOfBirth"].Value = worker.DateOfBirth;
-        //    cmd.Parameters["@Sex"].Value = worker.Sex;
-
-        //    cmd.Connection.Open();
-        //    cmd.ExecuteNonQuery();
-        //    cmd.Connection.Close();
-        //}
-
+        /// <summary>
+        /// Добавляет в базу данных одну запись
+        /// </summary>
+        /// <param name="fullName"></param>
+        /// <param name="dateOfBirth"></param>
+        /// <param name="sex"></param>
         public void CreateOneRecord(string fullName, DateTime dateOfBirth, string sex)
         {
             SqlCommand cmd = Get_CreateRecordCmd();
@@ -46,6 +47,10 @@ namespace DataLayer
             cmd.Connection.Close();
         }
 
+        /// <summary>
+        /// Получает из базы данных уникальные записи
+        /// </summary>
+        /// <param name="workers"></param>
         public void GetWorkers(IWorkersCollection workers)
         {
             SqlCommand cmd = Get_SelectUniqueWorkersCmd();
@@ -60,6 +65,12 @@ namespace DataLayer
             cmd.Connection.Close();
         }
 
+        /// <summary>
+        /// Получает из базы данных записи на основе переданных параметров
+        /// </summary>
+        /// <param name="workers"></param>
+        /// <param name="nameExpression"></param>
+        /// <param name="sex"></param>
         public void GetWorkers(IWorkersCollection workers, string nameExpression, string sex)
         {
             SqlCommand cmd = Get_SelectWorkersCmd();
@@ -75,6 +86,10 @@ namespace DataLayer
             }
         }
 
+        /// <summary>
+        /// Добавляет в базу данных массив записей
+        /// </summary>
+        /// <param name="workers"></param>
         public void CreateRecordsSet(IWorker[] workers)
         {
             int dataPartSize = 100000;
@@ -86,7 +101,7 @@ namespace DataLayer
                 Array.Copy(workers, i * dataPartSize, _workers, 0, dataPartSize);
                 GetAndExecuteCmd(_workers);
 
-                Console.WriteLine($" {i} часть данных отправлена.");
+                Console.WriteLine($" {i + 1} часть данных отправлена.");
             }
 
             int remains = workers.Length % dataPartSize;
@@ -100,6 +115,10 @@ namespace DataLayer
             Console.WriteLine("Все данные успешно отправлены!");
         }
 
+        /// <summary>
+        /// Получает и выполняет Sql-команду на добавление записи
+        /// </summary>
+        /// <param name="workers"></param>
         private void GetAndExecuteCmd(IWorker[] workers)
         {
             SqlCommand cmd = Get_CreateRecordsCmd(workers);
@@ -109,6 +128,10 @@ namespace DataLayer
             cmd.Connection.Close();
         }
 
+        /// <summary>
+        /// Создаёт Sql-команду на добавление записи
+        /// </summary>
+        /// <returns></returns>
         private SqlCommand Get_CreateRecordCmd()
         {
             SqlCommand cmd = new SqlCommand("INSERT INTO Workers(FullName, DateOfBirth, Sex) VALUES(@FullName, @DateOfBirth, @Sex)");
@@ -119,6 +142,10 @@ namespace DataLayer
             return cmd;
         }
 
+        /// <summary>
+        /// Создаёт Sql-команду на создание таблицы
+        /// </summary>
+        /// <returns></returns>
         private SqlCommand Get_CreateTableCmd()
         {
             SqlCommand cmd = new SqlCommand("IF OBJECT_ID('Workers', 'U') IS NULL " +
@@ -130,6 +157,10 @@ namespace DataLayer
             return cmd;
         }
 
+        /// <summary>
+        /// Создаёт Sql-команду на выборку уникальных записей
+        /// </summary>
+        /// <returns></returns>
         private SqlCommand Get_SelectUniqueWorkersCmd()
         {
             SqlCommand cmd = new SqlCommand("SELECT * FROM Workers WHERE " +
@@ -140,6 +171,10 @@ namespace DataLayer
             return cmd;
         }
 
+        /// <summary>
+        /// Создаёт Sql-команду на выборку записей по критериям
+        /// </summary>
+        /// <returns></returns>
         private SqlCommand Get_SelectWorkersCmd()
         {
             SqlCommand cmd = new SqlCommand("SELECT * FROM Workers WHERE(FullName LIKE(@expr) AND Sex=@sex)");
@@ -151,6 +186,11 @@ namespace DataLayer
             return cmd;
         }
 
+        /// <summary>
+        /// Создаёт Sql-команду на добавление массива даннвх
+        /// </summary>
+        /// <param name="workers"></param>
+        /// <returns></returns>
         private SqlCommand Get_CreateRecordsCmd(IWorker[]workers)
         {
             int index = 0;

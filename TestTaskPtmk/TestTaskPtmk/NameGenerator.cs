@@ -8,6 +8,9 @@ using System.IO;
 
 namespace TestTaskPtmk
 {
+    /// <summary>
+    /// Генерирует данные для создания Worker случайным образом
+    /// </summary>
     public class NameGenerator
     {
         private Random rnd = new Random(DateTime.Now.Millisecond);
@@ -19,6 +22,11 @@ namespace TestTaskPtmk
             LoadNames();
         }
 
+        /// <summary>
+        /// Генерирует заданное количество Worker
+        /// </summary>
+        /// <param name="workers"></param>
+        /// <param name="count"></param>
         public void Generate(WorkersCollection workers, int count)
         {
             int fCount = 0;
@@ -54,6 +62,9 @@ namespace TestTaskPtmk
             }
         }
 
+        /// <summary>
+        /// Загружает все возможные ФИО из Json-файла
+        /// </summary>
         private void LoadNames()
         {
             using (FileStream fs = File.OpenRead(@"..\..\names.json"))
@@ -69,6 +80,11 @@ namespace TestTaskPtmk
             }
         }
 
+        /// <summary>
+        /// Возвращает словарь с коллекциями данных для мужчин или для женщин - определяется случайно
+        /// </summary>
+        /// <param name="sex"></param>
+        /// <returns></returns>
         private Dictionary<string, string[]> GetNamesCollection(out string sex)
         {
             int c = rnd.Next(0, 2);
@@ -84,6 +100,10 @@ namespace TestTaskPtmk
             }
         }
 
+        /// <summary>
+        /// Генерирует случайную дату
+        /// </summary>
+        /// <returns></returns>
         private DateTime GetDate()
         {
             DateTime startDate = DateTime.Today.AddYears(-80);

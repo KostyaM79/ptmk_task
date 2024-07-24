@@ -10,8 +10,6 @@ namespace DataLayer
     {
         void Create(string fullName, DateTime dateOfBirth, string sex);
 
-        void Add(IWorker worker);
-
         IWorker[] Workers { get; }
     }
 }

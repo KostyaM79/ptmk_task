@@ -7,17 +7,24 @@ using DataLayer;
 
 namespace TestTaskPtmk
 {
+    /// <summary>
+    /// Представляет коллекцию Worker
+    /// </summary>
     public class WorkersCollection : IWorkersCollection
     {
         private List<IWorker> workers = new List<IWorker>();
 
+        /// <summary>
+        /// Возаращает массив Worker
+        /// </summary>
         public IWorker[] Workers => workers.ToArray();
 
-        public void Add(IWorker worker)
-        {
-            workers.Add(worker);
-        }
-
+        /// <summary>
+        /// Создаёт нового Worker и добавляет его в коллекцию
+        /// </summary>
+        /// <param name="fullName"></param>
+        /// <param name="dateOfBirth"></param>
+        /// <param name="sex"></param>
         public void Create(string fullName, DateTime dateOfBirth, string sex)
         {
             workers.Add(new Worker()

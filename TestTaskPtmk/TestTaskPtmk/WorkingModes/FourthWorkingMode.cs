@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace TestTaskPtmk
 {
+    /// <summary>
+    /// Четвёртый режим
+    /// </summary>
     public class FourthWorkingMode : WorkingMode
     {
         public FourthWorkingMode()
@@ -14,6 +17,12 @@ namespace TestTaskPtmk
             ModeId = "4";
         }
 
+        /// <summary>
+        /// Создаёт 1 000 000 объектов и отправляет их в базу данных
+        /// </summary>
+        /// <param name="args"></param>
+        /// <param name="db"></param>
+        /// <returns></returns>
         public override string Run(string[] args, IDataBase db)
         {
             WorkersCollection workers = new WorkersCollection();

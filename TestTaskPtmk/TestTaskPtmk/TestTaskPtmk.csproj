@@ -76,7 +76,7 @@
     <Compile Include="NameGenerator.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Report.cs" />
+    <Compile Include="ConsoleReport.cs" />
     <Compile Include="Worker.cs" />
     <Compile Include="WorkersCollection.cs" />
     <Compile Include="WorkingMode.cs" />

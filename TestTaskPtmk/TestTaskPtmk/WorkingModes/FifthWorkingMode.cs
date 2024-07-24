@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace TestTaskPtmk
 {
+    /// <summary>
+    /// Пятый режим
+    /// </summary>
     public class FifthWorkingMode : WorkingMode
     {
         public FifthWorkingMode()
@@ -14,6 +17,13 @@ namespace TestTaskPtmk
             ModeId = "5";
         }
 
+        /// <summary>
+        /// Получает из базы данных записи, где ФИО начинается с F и пол - Male,
+        /// также выводит время выполнения запроса
+        /// </summary>
+        /// <param name="args"></param>
+        /// <param name="db"></param>
+        /// <returns></returns>
         public override string Run(string[] args, IDataBase db)
         {
             WorkersCollection workers = new WorkersCollection();

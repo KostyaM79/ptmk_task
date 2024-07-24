@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace TestTaskPtmk
 {
+    /// <summary>
+    /// Первый режим
+    /// </summary>
     public class FirstWorkingMode : WorkingMode
     {
         public FirstWorkingMode()
@@ -14,6 +17,12 @@ namespace TestTaskPtmk
             ModeId = "1";
         }
 
+        /// <summary>
+        /// Создаёт таблицу в базе данных и возвращает сообщение о результатах операции
+        /// </summary>
+        /// <param name="args"></param>
+        /// <param name="db"></param>
+        /// <returns></returns>
         public override string Run(string[] args, IDataBase db)
         {
             if (db.CreateWorkersTable())

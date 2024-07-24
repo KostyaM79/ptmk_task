@@ -7,6 +7,9 @@ using System.Reflection;
 
 namespace TestTaskPtmk
 {
+    /// <summary>
+    /// Коллекция режимов работы
+    /// </summary>
     public class WorkingModesCollection
     {
         List<WorkingMode> workingModes = new List<WorkingMode>();
@@ -16,11 +19,19 @@ namespace TestTaskPtmk
             CollectionInitialize();
         }
 
+        /// <summary>
+        /// Возвращает объект режима работы по его идентификатору, если идентификатор указан неверно, то возвращает пустой режим
+        /// </summary>
+        /// <param name="modeId"></param>
+        /// <returns></returns>
         public WorkingMode GetWorkingMode(string modeId)
         {
             return workingModes.SingleOrDefault(m => m.ModeId == modeId) ?? workingModes.SingleOrDefault(m => m.ModeId == "0");
         }
 
+        /// <summary>
+        /// Ищет в сборке все типы режимов, создаёт из экземпляры и заполняет ими коллекцию workingModes
+        /// </summary>
         private void CollectionInitialize()
         {
             Assembly assembly = Assembly.GetAssembly(typeof(WorkingMode));                              // Получаем сборку, содержащую класс WorkingMode
